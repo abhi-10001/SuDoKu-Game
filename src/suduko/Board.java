@@ -405,152 +405,73 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                     blockNo[i][j].setBackground(new Color(212, 235, 242));//lighter blue
                     System.out.println(X + " " + Y);
 
+                    
+                    //to highlight the 3x3 box 
                     if ((X == 0 || X == 55 || X == 110) && (Y == 0 || Y == 55 || Y == 110)) {
-                        
-                        for(int s = 0; s <3; s++){
-                            for(int t = 0; t<3; t++){
+
+                        for (int s = 0; s < 3; s++) {
+                            for (int t = 0; t < 3; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[0][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[0][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[0][2].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][2].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][2].setBackground(new Color(212, 235, 242));
-                    }else if ((X == 0 || X == 55 || X == 110) && (Y == 170 || Y == 225 || Y == 280)) {
-                        
-                        for(int s = 3; s <6; s++){
-                            for(int t = 0; t<3; t++){
+                    } else if ((X == 0 || X == 55 || X == 110) && (Y == 170 || Y == 225 || Y == 280)) {
+
+                        for (int s = 3; s < 6; s++) {
+                            for (int t = 0; t < 3; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[3][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[3][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[3][2].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][2].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][2].setBackground(new Color(212, 235, 242));
-                    }else if ((X == 0 || X == 55 || X == 110) && (Y == 340 || Y == 395 || Y == 450)) {
-                        
-                        for(int s = 6; s <9; s++){
-                            for(int t = 0; t<3; t++){
+                    } else if ((X == 0 || X == 55 || X == 110) && (Y == 340 || Y == 395 || Y == 450)) {
+
+                        for (int s = 6; s < 9; s++) {
+                            for (int t = 0; t < 3; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[6][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[6][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[6][2].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][2].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][0].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][1].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][2].setBackground(new Color(212, 235, 242));
-                        
-                    }else if ((X == 170 || X == 225 || X == 280) && (Y == 0 || Y == 55 || Y == 110)) {
-                        
-                        for(int s = 0; s <3; s++){
-                            for(int t = 3; t<6; t++){
+
+                    } else if ((X == 170 || X == 225 || X == 280) && (Y == 0 || Y == 55 || Y == 110)) {
+
+                        for (int s = 0; s < 3; s++) {
+                            for (int t = 3; t < 6; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[0][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[0][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[0][5].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][5].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][5].setBackground(new Color(212, 235, 242));
-                    }else if ((X == 170 || X == 225 || X == 280) && (Y == 170 || Y == 225 || Y == 280)) {
-                        
-                        for(int s = 3; s <6; s++){
-                            for(int t = 3; t<6; t++){
+                    } else if ((X == 170 || X == 225 || X == 280) && (Y == 170 || Y == 225 || Y == 280)) {
+
+                        for (int s = 3; s < 6; s++) {
+                            for (int t = 3; t < 6; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[3][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[3][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[3][5].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][5].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][5].setBackground(new Color(212, 235, 242));
-                    }else if ((X == 170 || X == 225 || X == 280) && (Y == 340 || Y == 395 || Y == 450)) {
-                        
-                        for(int s = 6; s <9; s++){
-                            for(int t = 3; t<6; t++){
+                    } else if ((X == 170 || X == 225 || X == 280) && (Y == 340 || Y == 395 || Y == 450)) {
+
+                        for (int s = 6; s < 9; s++) {
+                            for (int t = 3; t < 6; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[6][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[6][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[6][5].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][5].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][3].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][4].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][5].setBackground(new Color(212, 235, 242));
-                        
-                    }else if ((X == 340 || X == 395 || X == 450) && (Y == 0 || Y == 55 || Y == 110)) {
-                        
-                        for(int s = 0; s <3; s++){
-                            for(int t = 6; t<9; t++){
+
+                    } else if ((X == 340 || X == 395 || X == 450) && (Y == 0 || Y == 55 || Y == 110)) {
+
+                        for (int s = 0; s < 3; s++) {
+                            for (int t = 6; t < 9; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[0][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[0][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[0][8].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[1][8].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[2][8].setBackground(new Color(212, 235, 242));
-                    }else if ((X == 340 || X == 395 || X == 450) && (Y == 170 || Y == 225 || Y == 280)) {
-                        
-                        for(int s = 3; s <6; s++){
-                            for(int t = 6; t<9; t++){
+                    } else if ((X == 340 || X == 395 || X == 450) && (Y == 170 || Y == 225 || Y == 280)) {
+
+                        for (int s = 3; s < 6; s++) {
+                            for (int t = 6; t < 9; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[3][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[3][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[3][8].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[4][8].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[5][8].setBackground(new Color(212, 235, 242));
-                    }else if ((X == 340 || X == 395 || X == 450) && (Y == 340 || Y == 395 || Y == 450)) {
-                        
-                        for(int s = 6; s <9; s++){
-                            for(int t = 6; t<9; t++){
+                    } else if ((X == 340 || X == 395 || X == 450) && (Y == 340 || Y == 395 || Y == 450)) {
+
+                        for (int s = 6; s < 9; s++) {
+                            for (int t = 6; t < 9; t++) {
                                 blockNo[s][t].setBackground(new Color(212, 235, 242));
                             }
                         }
-//                        blockNo[6][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[6][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[6][8].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[7][8].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][6].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][7].setBackground(new Color(212, 235, 242));
-//                        blockNo[8][8].setBackground(new Color(212, 235, 242));
                     }
 
                 }
