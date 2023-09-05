@@ -4,6 +4,7 @@
  */
 package suduko;
 
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,6 +18,7 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -29,8 +31,10 @@ import javax.swing.border.Border;
  */
 public class Board extends JFrame implements ActionListener, FocusListener {
 
+    Choice difficulty;
     JButton one, two, three, four, five, six, seven, eight, nine, erase, check, newGame, getSolution;
     JTextField currentBlock;
+    int difficultyCount;
 
     JTextField[][] blockNo = new JTextField[9][9];
     int[][] puzzle;
@@ -93,14 +97,28 @@ public class Board extends JFrame implements ActionListener, FocusListener {
 
         }
 
+        JLabel difficultylabel = new JLabel("Choose Difficulty Level");
+        difficultylabel.setBounds(30, 30, 250, 30);
+        difficultylabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        add(difficultylabel);
+
+        difficulty = new Choice();
+        difficulty.setBounds(300, 30, 100, 30);
+        difficulty.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        difficulty.setBackground(Color.WHITE);
+        difficulty.add("Easy");
+        difficulty.add("Medium");
+        difficulty.add("Hard");
+        add(difficulty);
+
         JPanel jp = new JPanel();
-        jp.setBounds(50, 50, 510, 510);
+        jp.setBounds(50, 120, 510, 510);
         jp.setBackground(Color.black);
         jp.setLayout(null);
         add(jp);
 
         JPanel jp2 = new JPanel();
-        jp2.setBounds(45, 45, 515, 515);
+        jp2.setBounds(45, 115, 515, 515);
         jp2.setBackground(Color.black);
         jp2.setLayout(null);
         add(jp2);
@@ -202,7 +220,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
         getSolution.addActionListener(this);
         add(getSolution);
 
-        setSize(900, 600);
+        setSize(900, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
@@ -277,8 +295,14 @@ public class Board extends JFrame implements ActionListener, FocusListener {
 
     public void fillBox(int[][] puzzle) {
 
+        if((difficulty.getSelectedItem()).equals("Easy")){
+            difficultyCount = 50;
+        }else if((difficulty.getSelectedItem()).equals("Medium")){
+            difficultyCount = 42;
+        }else{
+            difficultyCount = 35;
+        }
         int count = 0;
-
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 blockNo[i][j].setBackground(Color.white);
@@ -289,7 +313,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
             for (int j = 0; j < 9; j++) {
 
                 blockNo[i][j].setText(puzzle[i][j] + "");
-                if (count < 44) {
+                if (count < difficultyCount) {
                     JTextField box = new JTextField();
                     box = randomBox();
                     box.setBackground(new Color(173, 216, 230));
