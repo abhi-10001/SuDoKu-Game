@@ -70,7 +70,7 @@ public class Menu extends JFrame implements ActionListener {
             new Board();
             this.setVisible(false);
         } else if (ae.getSource() == getSolution) {
-
+            new FindSolution();
         } else {
             System.exit(0);
         }

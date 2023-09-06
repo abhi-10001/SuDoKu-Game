@@ -233,22 +233,31 @@ public class Board extends JFrame implements ActionListener, FocusListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == one) {
             currentBlock.setText(one.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == two) {
             currentBlock.setText(two.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == three) {
             currentBlock.setText(three.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == four) {
             currentBlock.setText(four.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == five) {
             currentBlock.setText(five.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == six) {
             currentBlock.setText(six.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == seven) {
             currentBlock.setText(seven.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == eight) {
             currentBlock.setText(eight.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == nine) {
             currentBlock.setText(nine.getText());
+            currentBlock.setForeground(new Color(50, 205, 50));
         } else if (ae.getSource() == erase) {
             currentBlock.setText("");
         } else if (ae.getSource() == check) {
@@ -403,9 +412,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
 
                 if (box.x == X || box.y == Y) { // to highlight the row and the coloum of selected box
                     blockNo[i][j].setBackground(new Color(212, 235, 242));//lighter blue
-                    System.out.println(X + " " + Y);
 
-                    
                     //to highlight the 3x3 box 
                     if ((X == 0 || X == 55 || X == 110) && (Y == 0 || Y == 55 || Y == 110)) {
 

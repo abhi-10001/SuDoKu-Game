@@ -4,33 +4,85 @@
  */
 package suduko;
 
-import java.util.Arrays;
-import javax.swing.JOptionPane;
-import static suduko.SudokuValidator.isNumberInBox;
-import static suduko.SudokuValidator.isNumberInColumn;
-import static suduko.SudokuValidator.isNumberInRow;
-
 /**
  *
  * @author abhinendra
  */
 public class GetSolution {
 
-    static int[][] solution = new int[9][9];
+    static int[][] solution
+            = {{0, 0, 4, 0, 7, 8, 9, 1, 0},
+            {6, 0, 2, 1, 9, 5, 3, 4, 0},
+            {0, 9, 8, 0, 4, 2, 5, 6, 7},
+            {8, 0, 9, 7, 6, 0, 4, 2, 3},
+            {4, 2, 6, 8, 5, 3, 7, 9, 1},
+            {7, 1, 3, 9, 2, 0, 0, 5, 6},
+            {9, 6, 1, 5, 3, 7, 0, 8, 4},
+            {2, 8, 7, 4, 0, 9, 6, 3, 5},
+            {3, 0, 5, 0, 8, 6, 1, 7, 9}};
 
-    public static int[][] solveSudoku(int[][] board) {
-        if (solveBoard(board)) {
-            JOptionPane.showMessageDialog(null, "Unsolvable!!!");
+    GetSolution(int[][] arr) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(solution[i][j] + " ");
+            }
+            System.out.println();
         }
-        return board;
+        System.out.println();
+        solveSudoku(arr);
+    }
+
+    public static int[][] help() {
+        return solution;
+    }
+
+    public static void solveSudoku(int[][] board) {
+        if (solveBoard(board)) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    System.out.print(board[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public static boolean isNumberInRow(int[][] board, int number, int row) {
+        for (int i = 0; i < 9; i++) {
+            if (board[row][i] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isNumberInColumn(int[][] board, int number, int column) {
+        for (int i = 0; i < 9; i++) {
+            if (board[i][column] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isNumberInBox(int[][] board, int number, int row, int column) {
+        int localBoxRow = row - row % 3;
+        int localBoxColumn = column - column % 3;
+
+        for (int i = localBoxRow; i < localBoxRow + 3; i++) {
+            for (int j = localBoxColumn; j < localBoxColumn + 3; j++) {
+                if (board[i][j] == number) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isValidPlacement(int[][] board, int number, int row, int column) {
-        if (isNumberInRow(board, number, row) > 1 || isNumberInColumn(board, number, column) > 1 || isNumberInBox(board, number, row, column) > 1) {
-            return false;
-        } else {
-            return true;
-        }
+        return !isNumberInRow(board, number, row)
+                && !isNumberInColumn(board, number, column)
+                && !isNumberInBox(board, number, row, column);
     }
 
     public static boolean solveBoard(int[][] board) {
@@ -42,6 +94,7 @@ public class GetSolution {
                             board[row][column] = numberToTry;
 
                             if (solveBoard(board)) {
+                                solution[row][column] = numberToTry;
                                 return true;
                             } else {
                                 board[row][column] = 0;
@@ -56,6 +109,7 @@ public class GetSolution {
     }
 
     public static void main(String[] args) {
-
+        int[][] arr = new int[9][9];
+        new GetSolution(arr);
     }
 }
