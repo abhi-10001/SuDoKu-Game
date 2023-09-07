@@ -67,9 +67,10 @@ public class Menu extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == play) {
-            new Board();
             this.setVisible(false);
+            new Board();
         } else if (ae.getSource() == getSolution) {
+            this.setVisible(false);
             new FindSolution();
         } else {
             System.exit(0);

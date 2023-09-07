@@ -8,12 +8,14 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,7 +29,7 @@ import javax.swing.JTextField;
  */
 public class FindSolution extends JFrame implements ActionListener, FocusListener {
     
-    JButton one, two, three, four, five, six, seven, eight, nine, erase, newGame, findSolution, tryAnother;
+    JButton one, two, three, four, five, six, seven, eight, nine, erase, newGame, findSolution, tryAnother, menu;
     JTextField currentBlock;
     
     JTextField[][] blockNo = new JTextField[9][9];
@@ -178,8 +180,10 @@ public class FindSolution extends JFrame implements ActionListener, FocusListene
         erase.addActionListener(this);
         add(erase);
         
-        findSolution = new JButton("Find Solution");
-        findSolution.setBounds(650, 170, 180, 50);
+        ImageIcon findimg1 = new ImageIcon(ClassLoader.getSystemResource("icons/find.png"));
+        Image findimg2 = findimg1.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        findSolution = new JButton("Find Solution", new ImageIcon(findimg2));
+        findSolution.setBounds(650, 170, 220, 50);
         findSolution.setFont(new Font("Tahoma", Font.PLAIN, 22));
         findSolution.setFocusable(false);
         findSolution.addActionListener(this);
@@ -191,6 +195,16 @@ public class FindSolution extends JFrame implements ActionListener, FocusListene
         tryAnother.setFocusable(false);
         tryAnother.addActionListener(this);
         add(tryAnother);
+        
+       
+        ImageIcon cancelimg1 = new ImageIcon(ClassLoader.getSystemResource("icons/home.png"));
+        Image cancelimg2 = cancelimg1.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        menu = new JButton("Home", new ImageIcon(cancelimg2));
+        menu.setBounds(720, 30, 140, 50);
+        menu.setFont(new Font("Tahoma", Font.BOLD, 20));
+        menu.addActionListener(this);
+        menu.setFocusable(false);
+        add(menu);
         
         setSize(900, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -254,6 +268,9 @@ public class FindSolution extends JFrame implements ActionListener, FocusListene
                     blockNo[i][j].setBackground(Color.white);
                 }
             }
+        }else if(ae.getSource() == menu){
+            this.setVisible(false);
+            new Menu();
         }
         
     }

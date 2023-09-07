@@ -5,6 +5,9 @@
         <group>
             <file>file:/home/abhinendra/My_Projects/SuDoKu-Game/src/suduko/Puzzle.java</file>
             <file>file:/home/abhinendra/My_Projects/SuDoKu-Game/src/suduko/Board.java</file>
+            <file>file:/home/abhinendra/My_Projects/SuDoKu-Game/src/suduko/FindSolution.java</file>
+            <file>file:/home/abhinendra/My_Projects/SuDoKu-Game/src/suduko/GetSolution.java</file>
+            <file>file:/home/abhinendra/My_Projects/SuDoKu-Game/src/suduko/Menu.java</file>
             <file>file:/home/abhinendra/My_Projects/SuDoKu-Game/src/suduko/SudokuValidator.java</file>
         </group>
     </open-files>

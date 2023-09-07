@@ -8,6 +8,7 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Arrays;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
@@ -24,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 
 /**
@@ -33,13 +36,42 @@ import javax.swing.border.Border;
 public class Board extends JFrame implements ActionListener, FocusListener {
 
     Choice difficulty;
-    JButton one, two, three, four, five, six, seven, eight, nine, erase, check, newGame, getSolution;
+    JButton one, two, three, four, five, six, seven, eight, nine, erase, check, newGame, getSolution, menu, starttime, stoptime;
     JTextField currentBlock;
     int difficultyCount;
     boolean[][] flag = new boolean[9][9]; // to identify every textfield 
 
     JTextField[][] blockNo = new JTextField[9][9];
     int[][] puzzle;
+    int[][] entry = new int[9][9];
+    int mistakeCount = 0;
+
+    JLabel mistakecountlbl, timeJLabel;
+
+    int elapsedTime = 0;
+    int seconds = 0;
+    int minutes = 0;
+    int hours = 0;
+    boolean started = false;
+    String seconds_string = String.format("%02d", seconds);
+    String minutes_string = String.format("%02d", minutes);
+    String hours_string = String.format("%02d", hours);
+
+    Timer timer = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            elapsedTime += 1000;
+            hours = (elapsedTime / 3600000);
+            minutes = (elapsedTime / 60000) % 60;
+            seconds = (elapsedTime / 1000) % 60;
+
+            String seconds_string = String.format("%02d", seconds);
+            String minutes_string = String.format("%02d", minutes);
+            String hours_string = String.format("%02d", hours);
+
+            timeJLabel.setText(hours_string + ":" + minutes_string + ":" + seconds_string);
+        }
+    });
 
     Board() {
         super("SuDoKu");
@@ -99,19 +131,53 @@ public class Board extends JFrame implements ActionListener, FocusListener {
 
         }
 
-        JLabel difficultylabel = new JLabel("Choose Difficulty Level");
-        difficultylabel.setBounds(45, 30, 250, 30);
+        JLabel difficultylabel = new JLabel("Choose Difficulty Level:");
+        difficultylabel.setBounds(65, 30, 255, 30);
         difficultylabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
         add(difficultylabel);
 
         difficulty = new Choice();
-        difficulty.setBounds(320, 30, 120, 30);
+        difficulty.setBounds(340, 30, 120, 30);
         difficulty.setFont(new Font("Railway", Font.PLAIN, 23));
-        difficulty.setBackground(Color.WHITE);
+        difficulty.setBackground(new Color(212, 235, 242));
         difficulty.add("Easy");
         difficulty.add("Medium");
         difficulty.add("Hard");
         add(difficulty);
+
+        JLabel timerlbl = new JLabel("Timer: ");
+        timerlbl.setBounds(55, 80, 130, 30);
+        timerlbl.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        add(timerlbl);
+
+        timeJLabel = new JLabel("");
+        timeJLabel.setBounds(130, 80, 130, 30);
+        timeJLabel.setFont(new Font("Railway", Font.PLAIN, 23));
+        add(timeJLabel);
+
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/start.png"));
+        Image i2 = i1.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        starttime = new JButton(i3);
+        starttime.setBorder(null);
+        starttime.setContentAreaFilled(false);
+        starttime.setBounds(240, 80, 30, 30);
+        starttime.addActionListener(this);
+        starttime.setFocusable(false);
+        starttime.setVisible(false);
+        add(starttime);
+
+        ImageIcon i4 = new ImageIcon(ClassLoader.getSystemResource("icons/pause.png"));
+        Image i5 = i4.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+        ImageIcon i6 = new ImageIcon(i5);
+        stoptime = new JButton(i6);
+        stoptime.setBorder(null);
+        stoptime.setContentAreaFilled(false);
+        stoptime.setBounds(240, 80, 30, 30);
+        stoptime.addActionListener(this);
+        stoptime.setFocusable(false);
+        stoptime.setVisible(false);
+        add(stoptime);
 
         JPanel jp = new JPanel();
         jp.setBounds(50, 120, 510, 510);
@@ -131,96 +197,115 @@ public class Board extends JFrame implements ActionListener, FocusListener {
             }
         }
 
+        JLabel mistakelbl = new JLabel("Mistakes: ");
+        mistakelbl.setBounds(400, 80, 130, 30);
+        mistakelbl.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        add(mistakelbl);
+
+        mistakecountlbl = new JLabel("0/3");
+        mistakecountlbl.setBounds(510, 80, 50, 30);
+        mistakecountlbl.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        add(mistakecountlbl);
+
         one = new JButton("1");
-        one.setBounds(600, 250, 70, 70);
+        one.setBounds(600, 330, 70, 70);
         one.setFont(new Font("Tahoma", Font.PLAIN, 30));
         one.setFocusable(false);
         one.addActionListener(this);
         add(one);
 
         two = new JButton("2");
-        two.setBounds(680, 250, 70, 70);
+        two.setBounds(680, 330, 70, 70);
         two.setFont(new Font("Tahoma", Font.PLAIN, 30));
         two.setFocusable(false);
         two.addActionListener(this);
         add(two);
 
         three = new JButton("3");
-        three.setBounds(760, 250, 70, 70);
+        three.setBounds(760, 330, 70, 70);
         three.setFont(new Font("Tahoma", Font.PLAIN, 30));
         three.setFocusable(false);
         three.addActionListener(this);
         add(three);
 
         four = new JButton("4");
-        four.setBounds(600, 330, 70, 70);
+        four.setBounds(600, 410, 70, 70);
         four.setFont(new Font("Tahoma", Font.PLAIN, 30));
         four.setFocusable(false);
         four.addActionListener(this);
         add(four);
 
         five = new JButton("5");
-        five.setBounds(680, 330, 70, 70);
+        five.setBounds(680, 410, 70, 70);
         five.setFont(new Font("Tahoma", Font.PLAIN, 30));
         five.setFocusable(false);
         five.addActionListener(this);
         add(five);
 
         six = new JButton("6");
-        six.setBounds(760, 330, 70, 70);
+        six.setBounds(760, 410, 70, 70);
         six.setFont(new Font("Tahoma", Font.PLAIN, 30));
         six.setFocusable(false);
         six.addActionListener(this);
         add(six);
 
         seven = new JButton("7");
-        seven.setBounds(600, 410, 70, 70);
+        seven.setBounds(600, 490, 70, 70);
         seven.setFont(new Font("Tahoma", Font.PLAIN, 30));
         seven.setFocusable(false);
         seven.addActionListener(this);
         add(seven);
 
         eight = new JButton("8");
-        eight.setBounds(680, 410, 70, 70);
+        eight.setBounds(680, 490, 70, 70);
         eight.setFont(new Font("Tahoma", Font.PLAIN, 30));
         eight.setFocusable(false);
         eight.addActionListener(this);
         add(eight);
 
         nine = new JButton("9");
-        nine.setBounds(760, 410, 70, 70);
+        nine.setBounds(760, 490, 70, 70);
         nine.setFont(new Font("Tahoma", Font.PLAIN, 30));
         nine.setFocusable(false);
         nine.addActionListener(this);
         add(nine);
 
         erase = new JButton("Erase");
-        erase.setBounds(600, 100, 110, 50);
+        erase.setBounds(600, 180, 110, 50);
         erase.setFont(new Font("Tahoma", Font.PLAIN, 22));
         erase.setFocusable(false);
         erase.addActionListener(this);
         add(erase);
 
         check = new JButton("Check");
-        check.setBounds(750, 100, 110, 50);
+        check.setBounds(750, 180, 110, 50);
         check.setFont(new Font("Tahoma", Font.PLAIN, 22));
         check.setFocusable(false);
         check.addActionListener(this);
         add(check);
 
         newGame = new JButton("New Game");
-        newGame.setBounds(650, 30, 150, 50);
+        newGame.setBounds(650, 110, 150, 50);
         newGame.setFont(new Font("Tahoma", Font.PLAIN, 22));
         newGame.setFocusable(false);
         newGame.addActionListener(this);
         add(newGame);
 
         getSolution = new JButton("Get Solution");
-        getSolution.setBounds(650, 170, 180, 50);
+        getSolution.setBounds(650, 250, 180, 50);
         getSolution.setFont(new Font("Tahoma", Font.PLAIN, 22));
         getSolution.setFocusable(false);
         getSolution.addActionListener(this);
         add(getSolution);
+
+        ImageIcon cancelimg1 = new ImageIcon(ClassLoader.getSystemResource("icons/home.png"));
+        Image cancelimg2 = cancelimg1.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT);
+        menu = new JButton("Home", new ImageIcon(cancelimg2));
+        menu.setBounds(720, 30, 140, 50);
+        menu.setFont(new Font("Tahoma", Font.BOLD, 20));
+        menu.addActionListener(this);
+        menu.setFocusable(false);
+        add(menu);
 
         setSize(900, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -234,30 +319,166 @@ public class Board extends JFrame implements ActionListener, FocusListener {
         if (ae.getSource() == one) {
             currentBlock.setText(one.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == two) {
             currentBlock.setText(two.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == three) {
             currentBlock.setText(three.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == four) {
             currentBlock.setText(four.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == five) {
             currentBlock.setText(five.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == six) {
             currentBlock.setText(six.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == seven) {
             currentBlock.setText(seven.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == eight) {
             currentBlock.setText(eight.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == nine) {
             currentBlock.setText(nine.getText());
             currentBlock.setForeground(new Color(50, 205, 50));
+            if (!validEntry()) {
+                currentBlock.setForeground(Color.red);
+                mistakeCount++;
+                mistakecountlbl.setText(mistakeCount + "/3");
+            } else {
+                currentBlock.setForeground(new Color(50, 205, 50));
+            }
+            if (mistakeCount == 3) {
+                JOptionPane.showMessageDialog(null, "Game Over!!!");
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        blockNo[i][j].setEnabled(false);
+                    }
+                }
+            }
         } else if (ae.getSource() == erase) {
             currentBlock.setText("");
         } else if (ae.getSource() == check) {
@@ -268,6 +489,19 @@ public class Board extends JFrame implements ActionListener, FocusListener {
             }
             //printSudoku(puzzle);
         } else if (ae.getSource() == newGame) {
+            reset();
+            start();
+            stoptime.setVisible(true);
+            starttime.setVisible(false);
+
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    blockNo[i][j].setVisible(true);
+                }
+            }
+
+            mistakeCount = 0;
+            mistakecountlbl.setText(mistakeCount + "/3");
 
             //this for loop is created to assign enabled textfield with true and disabled with false(by default)
             for (int i = 0; i < 9; i++) {
@@ -278,8 +512,32 @@ public class Board extends JFrame implements ActionListener, FocusListener {
             puzzle = Puzzle.getPuzzle();
             fillBox(puzzle);;
         } else if (ae.getSource() == getSolution) {
+            reset();
             fillSolution(puzzle);
             //printSudoku(puzzle);
+        } else if (ae.getSource() == menu) {
+            reset();
+            this.setVisible(false);
+            new Menu();
+        } else if (ae.getSource() == starttime) {
+            start();
+            starttime.setVisible(false);
+            stoptime.setVisible(true);
+
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    blockNo[i][j].setVisible(true);
+                }
+            }
+        } else if (ae.getSource() == stoptime) {
+            stop();
+            starttime.setVisible(true);
+            stoptime.setVisible(false);
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    blockNo[i][j].setVisible(false);
+                }
+            }
         }
     }
 
@@ -378,6 +636,30 @@ public class Board extends JFrame implements ActionListener, FocusListener {
         //System.out.println(SudokuValidator.isValidSudoku(puzzle)); //to check if the generated sudoku is valid or not
     }
 
+    public boolean validEntry() {
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (blockNo[i][j].getText().equals("")) {
+                    entry[i][j] = 0;
+                } else {
+                    entry[i][j] = Integer.parseInt(blockNo[i][j].getText());
+                }
+            }
+        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (entry[i][j] != 0) {
+                    if (entry[i][j] != puzzle[i][j]) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     public boolean checkSolution(int[][] sol) {
 
         for (int i = 0; i < 9; i++) {
@@ -389,11 +671,33 @@ public class Board extends JFrame implements ActionListener, FocusListener {
             }
         }
 
-        if (SudokuValidator.isValidSudoku(puzzle)) {
+        if (SudokuValidator.isValidSudoku(sol)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    void start() {
+        timer.start();
+    }
+
+    void stop() {
+        timer.stop();
+    }
+
+    void reset() {
+        timer.stop();
+        elapsedTime = 0;
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+
+        String seconds_string = String.format("%02d", seconds);
+        String minutes_string = String.format("%02d", minutes);
+        String hours_string = String.format("%02d", hours);
+
+        timeJLabel.setText(hours_string + ":" + minutes_string + ":" + seconds_string);
     }
 
     @Override
