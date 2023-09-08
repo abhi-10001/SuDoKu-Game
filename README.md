@@ -8,7 +8,7 @@ A gui-application game for desktop, build completely in java.
 3. Note button for fill temporary number and future consideration.
 4. Implement hint option.
 
-##ScreenShots
-![Screenshot from 2023-09-05 19-30-36](https://github.com/abhi-10001/SuDoKu-Game/assets/98804705/d3ba2f71-966c-4e64-a131-91ca7ee516eb)
+## ScreenShots
+![Screenshot from 2023-09-08 13-35-16](https://github.com/abhi-10001/SuDoKu-Game/assets/98804705/a7c1ca12-4d26-4c61-9ca6-c9f2f8b0a60b)
 
-![Screenshot from 2023-09-05 19-30-10](https://github.com/abhi-10001/SuDoKu-Game/assets/98804705/20b922f6-1194-4712-820c-fd5e64aa6b5d)
+![Screenshot from 2023-09-08 13-35-52](https://github.com/abhi-10001/SuDoKu-Game/assets/98804705/c6534132-e79d-4485-a963-a23fccedae9c)
