@@ -328,6 +328,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -346,6 +347,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -364,6 +366,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -382,6 +385,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -400,6 +404,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -418,6 +423,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -436,6 +442,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -454,6 +461,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
@@ -472,6 +480,7 @@ public class Board extends JFrame implements ActionListener, FocusListener {
                 currentBlock.setForeground(new Color(50, 205, 50));
             }
             if (mistakeCount == 3) {
+                stop();
                 JOptionPane.showMessageDialog(null, "Game Over!!!");
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 9; j++) {
