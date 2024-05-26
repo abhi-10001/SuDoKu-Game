@@ -1,6 +1,7 @@
 # SuDoKu Game
 
-A gui-application game for desktop, build completely in java.
+Developed Sudoku solver in Java, utilizing backtracking algorithms for efficient puzzle resolution. Created a graphical user
+interface (GUI) to allow users to input and solve custom Sudoku puzzles interactively in real-time.
 
 ## Features to implement
 1. Rules page option in the menu.
